@@ -7,7 +7,6 @@
     </p>
     <PostList :posts="posts"/>
     <PostEditor
-      @save="addPost"
       :threadId="id"
     />
   </div>
@@ -42,14 +41,6 @@
         const postIds = Object.values(this.thread.posts)
         return Object.values(this.$store.state.posts)
           .filter(post => postIds.includes(post['.key']))
-      }
-    },
-    methods: {
-      addPost ({post}) {
-        const postId = post['.key']
-        this.$set(this.$store.state.posts, postId, post)
-        this.$set(this.thread.posts, postId, postId)
-        this.$set(this.$store.state.users[post.userId].posts, postId, postId)
       }
     }
   }
