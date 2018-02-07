@@ -4,6 +4,7 @@ import Home from '@/pages/PageHome'
 import ThreadShow from '@/pages/PageThreadShow'
 import Category from '@/pages/PageCategory'
 import Forum from '@/pages/PageForum'
+import Profile from '@/pages/PageProfile'
 import NotFound from '@/pages/PageNotFound'
 Vue.use(Router)
 
@@ -30,6 +31,12 @@ export default new Router({
       path: '/thread/:id',
       name: 'ThreadShow',
       component: ThreadShow,
+      props: true
+    },
+    {
+      path: '/me',
+      name: 'Profile',
+      component: Profile,
       props: true
     },
     {
