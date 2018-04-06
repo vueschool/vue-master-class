@@ -1,5 +1,5 @@
 <template>
-  <div class="col-large push-top">
+  <div v-if="thread && user" class="col-large push-top">
     <h1>{{thread.title}}
 
       <router-link
@@ -22,8 +22,10 @@
 </template>
 
 <script>
+  import firebase from 'firebase'
   import PostList from '@/components/PostList'
   import PostEditor from '@/components/PostEditor'
+  import {countObjectProperties} from '@/utils'
 
   export default {
     components: {
@@ -52,14 +54,7 @@
       },
 
       contributorsCount () {
-        // find the replies
-        const replies = Object.keys(this.thread.posts)
-          .filter(postId => postId !== this.thread.firstPostId)
-          .map(postId => this.$store.state.posts[postId])
-        // get the user ids
-        const userIds = replies.map(post => post.userId)
-        // count the unique ids
-        return userIds.filter((item, index) => index === userIds.indexOf(item)).length
+        return countObjectProperties(this.thread.contributors)
       },
 
       posts () {
@@ -67,6 +62,34 @@
         return Object.values(this.$store.state.posts)
           .filter(post => postIds.includes(post['.key']))
       }
+    },
+
+    created () {
+      // fetch thread
+      firebase.database().ref('threads').child(this.id).once('value', snapshot => {
+        const thread = snapshot.val()
+        this.$store.commit('setThread', {threadId: snapshot.key, thread: {...thread, '.key': snapshot.key}})
+
+        // fetch user
+        firebase.database().ref('users').child(thread.userId).once('value', snapshot => {
+          const user = snapshot.val()
+          this.$store.commit('setUser', {userId: snapshot.key, user: {...user, '.key': snapshot.key}})
+        })
+
+        Object.keys(thread.posts).forEach(postId => {
+          // fetch post
+          firebase.database().ref('posts').child(postId).once('value', snapshot => {
+            const post = snapshot.val()
+            this.$store.commit('setPost', {postId: snapshot.key, post: {...post, '.key': snapshot.key}})
+
+            // fetch user
+            firebase.database().ref('users').child(post.userId).once('value', snapshot => {
+              const user = snapshot.val()
+              this.$store.commit('setUser', {userId: snapshot.key, user: {...user, '.key': snapshot.key}})
+            })
+          })
+        })
+      })
     }
   }
 </script>
