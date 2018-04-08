@@ -1,5 +1,5 @@
 <template>
-  <div class="col-full push-top">
+  <div v-if="thread && text" class="col-full push-top">
 
     <h1>Editing <i>{{thread.title}}</i></h1>
 
@@ -32,7 +32,8 @@
       },
 
       text () {
-        return this.$store.state.posts[this.thread.firstPostId].text
+        const post = this.$store.state.posts[this.thread.firstPostId]
+        return post ? post.text : null
       }
     },
 
@@ -50,6 +51,11 @@
       cancel () {
         this.$router.push({name: 'ThreadShow', params: {id: this.id}})
       }
+    },
+
+    created () {
+      this.$store.dispatch('fetchThread', {id: this.id})
+        .then(thread => this.$store.dispatch('fetchPost', {id: thread.firstPostId}))
     }
   }
 </script>
