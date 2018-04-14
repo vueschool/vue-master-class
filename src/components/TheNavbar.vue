@@ -38,7 +38,7 @@
           <!--<a href="#">Logout</a>-->
         <!--</li>-->
 
-        <li class="navbar-user">
+        <li class="navbar-user" v-if="user">
           <router-link :to="{name: 'Profile'}">
             <img class="avatar-small" :src="user.avatar" alt="">
             <span>

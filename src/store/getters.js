@@ -2,8 +2,7 @@ import {countObjectProperties} from '@/utils'
 
 export default {
   authUser (state) {
-    // return state.users[state.authId]
-    return {}
+    return state.users[state.authId]
   },
 
   userThreadsCount: state => id => countObjectProperties(state.users[id].threads),
