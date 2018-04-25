@@ -15,7 +15,11 @@
 </template>
 
 <script>
-    export default {}
+    export default {
+      created () {
+        this.$emit('ready')
+      }
+    }
 </script>
 
 <style module>
