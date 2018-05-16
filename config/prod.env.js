@@ -1,10 +1,12 @@
 'use strict'
+require('dotenv').config()
+
 module.exports = {
-  FIREBASE_NODE_ENV: '"production"',
-  FIREBASE_API_KEY: "'AIzaSyC_WLhTuqbKU3unweXosx8zsKQccBOKs7c'",
-  FIREBASE_AUTH_DOMAIN: "'vue-school-forum.firebaseapp.com'",
-  FIREBASE_DATABASE_URL: "'https://vue-school-forum.firebaseio.com'",
-  FIREBASE_PROJECT_ID: "'vue-school-forum'",
-  FIREBASE_STORAGE_BUCKET: "'vue-school-forum.appspot.com'",
-  FIREBASE_MESSAGING_ID: "'426987850952'"
+  NODE_ENV: '"production"',
+  FIREBASE_API_KEY: JSON.stringify(process.env.FIREBASE_API_KEY),
+  FIREBASE_AUTH_DOMAIN: JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
+  FIREBASE_DATABASE_URL: JSON.stringify(process.env.FIREBASE_DATABASE_URL),
+  FIREBASE_PROJECT_ID: JSON.stringify(process.env.FIREBASE_PROJECT_ID),
+  FIREBASE_STORAGE_BUCKET: JSON.stringify(process.env.FIREBASE_STORAGE_BUCKET),
+  FIREBASE_MESSAGING_ID: JSON.stringify(process.env.FIREBASE_MESSAGING_ID)
 }
