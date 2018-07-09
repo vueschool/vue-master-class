@@ -28,7 +28,7 @@
 
       computed: {
         categoryForums () {
-          return Object.values(this.$store.state.forums)
+          return Object.values(this.$store.state.forums.items)
             .filter(forum => forum.categoryId === this.category['.key'])
         }
       }
