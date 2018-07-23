@@ -33,14 +33,9 @@
     },
 
     created () {
-      NProgress.configure({
-        speed: 200,
-        showSpinner: false
-      })
-      NProgress.start()
+      NProgress.configure({ speed: 200, showSpinner: false }).start()
       this.$router.beforeEach((to, from, next) => {
         this.showPage = false
-        NProgress.start()
         next()
       })
     }
