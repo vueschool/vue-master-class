@@ -56,7 +56,8 @@
         }
       },
       created () {
-        this.$store.dispatch('posts/fetchPosts', {ids: this.user.posts})
+        const userPostsIds = this.user.posts || []
+        this.$store.dispatch('posts/fetchPosts', {ids: userPostsIds})
           .then(() => this.asyncDataStatus_fetched())
       }
     }
