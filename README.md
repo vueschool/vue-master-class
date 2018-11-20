@@ -37,11 +37,9 @@ Convinced? [Enroll now](https://vueschool.io/the-vuejs-master-class)
 ``` bash
 # install dependencies
 npm install
-npm run setup
 
 # if you've installed yarn instead
 yarn
-yarn run setup
 
 # serve with hot reload at localhost:8080
 yarn dev

@@ -8,7 +8,7 @@
     "dev": "node build/dev-server.js",
     "start": "npm run dev",
     "build": "node build/build.js",
-    "setup": "node build/setup.js",
+    "postinstall": "node build/setup.js",
     "lint": "eslint --ext .js,.vue src",
     "db:seed": "firebase database:set / src/data.json -y"
   },
@@ -60,7 +60,7 @@
     "rimraf": "^2.6.0",
     "semver": "^5.6.0",
     "shelljs": "^0.7.6",
-    "url-loader": "^0.5.8",
+    "url-loader": "^1.1.2",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
